@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>AI Project Launchpad</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;700;800&family=IBM+Plex+Sans:wght@400;500&display=swap">
+<style>
+:root{--bg:#EEF2F6;--card:#fff;--ink:#10243A;--mute:#5A6B7D;--line:#D3DCE6;--blue:#1F5FFF;--blue-ink:#fff;--amber:#FFB020;--green:#0F8A57;--red:#C2352B;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0C1623;--card:#13233A;--ink:#E8EEF6;--mute:#93A4B8;--line:#233854;--blue:#5B8BFF;--blue-ink:#07101D;--amber:#FFC24D;--green:#3CC98B;--red:#FF7B70}}
+:root[data-theme="dark"]{--bg:#0C1623;--card:#13233A;--ink:#E8EEF6;--mute:#93A4B8;--line:#233854;--blue:#5B8BFF;--blue-ink:#07101D;--amber:#FFC24D;--green:#3CC98B;--red:#FF7B70}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.5 "IBM Plex Sans",system-ui,sans-serif}
+h1,h2,h3{font-family:"Bricolage Grotesque","IBM Plex Sans",system-ui,sans-serif;line-height:1.1;margin:0}
+.sim{background:var(--amber);color:#10243A;font-size:13px;padding:6px 14px;text-align:center}
+header{max-width:960px;margin:0 auto;padding:14px 16px 0;display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between}
+.brand{font:800 18px "Bricolage Grotesque",sans-serif}
+nav{display:flex;gap:4px}
+nav button{background:none;border:1px solid transparent;color:var(--mute);padding:7px 12px;border-radius:8px;font:inherit;font-size:14px;cursor:pointer}
+nav button[aria-selected=true]{background:var(--card);border-color:var(--line);color:var(--ink);font-weight:500}
+main{max-width:960px;margin:0 auto;padding:16px}
+.wrap{max-width:600px;margin:0 auto}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:22px}
+h1{font-size:clamp(32px,7vw,48px);font-weight:800;letter-spacing:-.02em}
+h2{font-size:26px;font-weight:700}
+h3{font-size:18px;font-weight:700;margin-bottom:8px}
+p{margin:10px 0}.mute{color:var(--mute)}.sm{font-size:13px}
+.btn{display:inline-block;background:var(--blue);color:var(--blue-ink);border:0;border-radius:10px;padding:13px 20px;font:500 16px inherit;font-family:inherit;cursor:pointer;text-decoration:none}
+.btn.alt{background:none;color:var(--ink);border:1px solid var(--line)}
+.btn.wa{background:#1FA855;color:#fff}
+.link{background:none;border:0;color:var(--mute);text-decoration:underline;font:inherit;font-size:14px;cursor:pointer;padding:8px 0}
+button:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid var(--amber);outline-offset:2px}
+.opt{display:block;width:100%;text-align:left;background:var(--bg);border:1px solid var(--line);color:var(--ink);border-radius:10px;padding:13px 14px;margin:8px 0;font:inherit;cursor:pointer}
+.opt:hover{border-color:var(--blue)}
+.bar{height:6px;background:var(--line);border-radius:3px;margin-bottom:18px;overflow:hidden}.bar i{display:block;height:100%;background:var(--blue);transition:width .25s}
+label{display:block;font-size:14px;font-weight:500;margin:12px 0 4px}
+input,select{width:100%;padding:11px 12px;border-radius:9px;border:1px solid var(--line);background:var(--bg);color:var(--ink);font:inherit}
+.err{color:var(--red);font-size:14px;margin-top:10px}
+.proj{border-left:5px solid var(--blue);padding:4px 0 4px 14px;margin:14px 0}
+.proj b{font:700 22px "Bricolage Grotesque",sans-serif;display:block}
+.pill{display:inline-block;background:var(--green);color:#fff;border-radius:99px;padding:3px 12px;font-size:13px;font-weight:500}
+.code{font:700 30px "Bricolage Grotesque",monospace;letter-spacing:.12em;background:var(--bg);border:1px dashed var(--blue);border-radius:10px;padding:12px;text-align:center;margin:10px 0}
+.row{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
+table{width:100%;border-collapse:collapse;font-size:14px}
+th,td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--line)}th{color:var(--mute);font-weight:500}
+td.n,th.n{text-align:right;font-variant-numeric:tabular-nums}
+.scroll{overflow-x:auto}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px}
+.kpi{font:800 34px "Bricolage Grotesque",sans-serif}
+.me{background:color-mix(in srgb,var(--amber) 28%,transparent)}
+footer{max-width:960px;margin:0 auto;padding:10px 16px 30px;font-size:13px;color:var(--mute)}
+</style>
+</head>
+<body>
+<div class="sim">Simulation prototype for the NxtWave Growth Challenge. Data stays in your browser. Dashboard model numbers are plan assumptions, not real results.</div>
+<header>
+  <div class="brand">AI Project Launchpad</div>
+  <nav role="tablist" id="nav"></nav>
+</header>
+<main id="app"></main>
+<footer>Workshop: "Build Your First AI Project in 60 Minutes" (free, online). Date and time to be confirmed by NxtWave. <button class="link" id="reset">Reset demo</button></footer>
+
+<script>
+(function(){
+var mem={};
+var store={get:function(k,d){try{var v=localStorage.getItem(k);if(v!==null)return JSON.parse(v)}catch(e){}return k in mem?mem[k]:d},set:function(k,v){mem[k]=v;try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}};
+var P=new URLSearchParams(location.search),REF=(P.get('ref')||'').toUpperCase(),SRC=P.get('utm_source')||(REF?'referral':'direct'),CLG=P.get('c')||'';
+var events=store.get('ev',[]),regs=store.get('regs',[]),me=store.get('me',null);
+var S={tab:'student',step:me?'thanks':'land',q:0,ans:{},res:null};
+var $=function(s){return document.querySelector(s)};
+var esc=function(s){return String(s).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})};
+function log(t,x){events.push({t:t,ts:Date.now(),src:SRC,ref:REF,x:x||''});store.set('ev',events)}
+
+var Q=[
+{k:'branch',q:'Which branch are you in?',o:[['cs','CSE / IT / AI-ML / Data Science'],['ec','ECE / EEE / Instrumentation / Medical Electronics'],['ot','Mechanical / Civil / Chemical / Other']]},
+{k:'code',q:'How comfortable are you with coding?',o:[['0','I can read code but rarely write it'],['1','I can write basic programs'],['2','I am comfortable building small apps']]},
+{k:'exp',q:'What have you done with AI so far?',o:[['0','Used ChatGPT or similar, nothing built'],['1','Followed a tutorial or ran someone else\'s code'],['2','Built something small on my own']]},
+{k:'goal',q:'What do you want from this?',o:[['resume','A project line for my resume'],['project','An idea for my final-year project'],['curious','Curiosity, I want to see how it works']]},
+{k:'hrs',q:'How many hours a week can you spare for this?',o:[['0','Under 3'],['1','3 to 6'],['2','More than 6']]}];
+
+var T={
+'cs-resume':['Resume screener','Paste a job post and a resume. The app scores the match and lists missing skills.','Start by writing the scoring prompt, then wrap it in a simple form.'],
+'cs-project':['Campus rulebook Q&A bot','Upload your college rulebook or syllabus PDF and ask it questions in plain English.','Start with one PDF and five test questions.'],
+'cs-curious':['Daily news digest','Pick three sources and get a short AI summary of each, every morning.','Start by summarising one article by hand.'],
+'ec-resume':['Sensor data explainer','Upload a sensor CSV. The app flags odd readings and explains them in plain words.','Start with any logged data you already have.'],
+'ec-project':['Sensor fault classifier','Train a small model that tells normal readings from faulty ones, then show it live.','Start with a public vibration or ECG dataset.'],
+'ec-curious':['Datasheet chat','Ask questions about any component datasheet PDF and get answers with page numbers.','Start with a datasheet you already use.'],
+'ot-resume':['Interview question generator','Paste a job description. Get likely questions and a model answer outline for each.','Start with one job post you care about.'],
+'ot-project':['Part defect spotter','Train an image model on good and defective parts, with no heavy code.','Start with 20 photos of each class.'],
+'ot-curious':['Notes to quiz maker','Turn your class notes into a quiz you can practise before exams.','Start with one chapter of notes.']};
+
+function result(a){
+ var score=+a.code+ +a.exp+ +a.hrs;
+ var lvl=score<=2?['Starting line','You are new to this. A guided build is the right first step.']:score<=4?['Ready to build','You have enough base to finish a small project in an hour.']:['Fast track','You can go further than the basics and extend your project after.'];
+ var t=T[a.branch+'-'+a.goal];
+ return{score:score,label:lvl[0],note:lvl[1],name:t[0],desc:t[1],first:t[2]}}
+
+function code(name){var L=(name.replace(/[^A-Za-z]/g,'').toUpperCase()+'XXX').slice(0,3),C='ABCDEFGHJKLMNPQRSTUVWXYZ23456789',s='';
+ for(var i=0;i<4;i++)s+=C[Math.floor(Math.random()*C.length)];return L+s}
+
+function nav(){
+ var tabs=[['student','Student view'],['board','Leaderboard'],['dash','Campaign dashboard']];
+ $('#nav').innerHTML=tabs.map(function(t){return '<button role="tab" data-t="'+t[0]+'" aria-selected="'+(S.tab===t[0])+'">'+t[1]+'</button>'}).join('');
+}
+
+function land(){return '<div class="wrap card"><h1>ChatGPT user is not an AI project. Fix that in 60 minutes.</h1>'+
+ '<p>Free workshop for final-year engineering students: build your first working AI project, live.</p>'+
+ '<p class="mute">Not sure it fits your branch or level? Answer 5 questions (about 1 minute) and get a starter project idea picked for you.</p>'+
+ '<div class="row"><button class="btn" id="go">Get my starter project</button></div>'+
+ '<button class="link" id="skip">Skip, register now</button>'+(REF?'<p class="sm mute">You came through a friend\'s link (code '+esc(REF)+').</p>':'')+'</div>'}
+
+function quiz(){var q=Q[S.q];return '<div class="wrap card"><div class="bar"><i style="width:'+(S.q/Q.length*100)+'%"></i></div><p class="sm mute">Question '+(S.q+1)+' of '+Q.length+'</p><h2>'+q.q+'</h2>'+
+ q.o.map(function(o){return '<button class="opt" data-v="'+o[0]+'">'+o[1]+'</button>'}).join('')+'</div>'}
+
+function resv(){var r=S.res;return '<div class="wrap card"><span class="pill">'+r.label+'</span><p class="mute">'+r.note+'</p>'+
+ '<div class="proj"><span class="sm mute">Your starter project</span><b>'+r.name+'</b>'+r.desc+'</div><p>'+r.first+'</p>'+
+ '<div class="row"><button class="btn" id="reg">Save my seat</button></div>'+
+ '<p class="sm mute">Registering takes about 30 seconds. The workshop is where you build this with guidance.</p></div>'}
+
+function regv(){var b=S.ans.branch||'';
+ return '<div class="wrap card"><h2>Save your seat</h2><p class="mute sm">Final-year students only.</p><div id="e"></div>'+
+ '<label for="n">Name</label><input id="n" autocomplete="name">'+
+ '<label for="em">Email</label><input id="em" type="email" autocomplete="email">'+
+ '<label for="ph">Phone</label><input id="ph" type="tel" autocomplete="tel">'+
+ '<label for="cl">College</label><input id="cl" value="'+esc(CLG)+'">'+
+ '<label for="br">Branch</label><select id="br"><option value="">Select</option>'+['CSE / IT / AI-ML / DS','ECE / EEE / Instrumentation / Medical Electronics','Mechanical / Civil / Chemical','Other'].map(function(x,i){var sel=(b==='cs'&&i===0)||(b==='ec'&&i===1)||(b==='ot'&&i===2);return '<option'+(sel?' selected':'')+'>'+x+'</option>'}).join('')+'</select>'+
+ '<label for="yr">Year</label><select id="yr"><option value="">Select</option><option>Final year (7th/8th semester)</option><option value="no">Not final year</option></select>'+
+ '<div class="row"><button class="btn" id="sub">Register</button></div></div>'}
+
+function mine(){return regs.filter(function(r){return r.ref===me.code})}
+function link(){return location.origin+location.pathname+'?ref='+me.code+'&utm_source=referral'}
+function thanks(){var proj=me.proj||'AI project',txt='I got "'+proj+'" on the AI project check. See what you get, and register for the free workshop: '+link();
+ return '<div class="wrap card"><span class="pill">You are in</span><h2 style="margin-top:10px">'+esc(me.name.split(' ')[0])+', your seat is saved.</h2>'+
+ '<p class="mute">Details will be sent to '+esc(me.email)+' once NxtWave confirms the date.</p><h3 style="margin-top:20px">Challenge a friend</h3>'+
+ '<p>Send your link. Every friend who registers moves you and your college up the leaderboard.</p><div class="code">'+me.code+'</div>'+
+ '<p class="sm mute" style="word-break:break-all">'+esc(link())+'</p>'+
+ '<div class="row"><a class="btn wa" id="wa" target="_blank" rel="noopener" href="https://wa.me/?text='+encodeURIComponent(txt)+'">Share on WhatsApp</a><button class="btn alt" id="cp">Copy link</button></div>'+
+ '<p><b>'+mine().length+'</b> friends registered with your code.</p>'+
+ '<button class="link" id="sim">Demo only: simulate a friend registering with my code</button></div>'}
+
+function board(){
+ var seedC=[['Sample College 1',41],['Sample College 2',33],['Sample College 3',27],['Sample College 4',19],['Sample College 5',12]],cm={};
+ seedC.forEach(function(c){cm[c[0]]=c[1]});regs.forEach(function(r){var c=r.college||'Unknown';cm[c]=(cm[c]||0)+1});
+ var cl=Object.keys(cm).map(function(k){return[k,cm[k]]}).sort(function(a,b){return b[1]-a[1]}).slice(0,8);
+ var seedP=[['A.K.',9],['S.R.',7],['M.T.',5],['P.N.',4]],pl=seedP.slice();
+ regs.forEach(function(r){var n=regs.filter(function(x){return x.ref===r.code}).length;if(n>0||(me&&r.code===me.code))pl.push([r.name.split(' ').map(function(w){return w[0]}).join('.').toUpperCase()+'.',n,r.code===(me&&me.code)])});
+ pl.sort(function(a,b){return b[1]-a[1]});
+ return '<div class="grid"><div class="card"><h3>College race</h3><div class="scroll"><table><tr><th>#</th><th>College</th><th class="n">Registrations</th></tr>'+cl.map(function(c,i){return '<tr><td>'+(i+1)+'</td><td>'+esc(c[0])+'</td><td class="n">'+c[1]+'</td></tr>'}).join('')+'</table></div></div>'+
+ '<div class="card"><h3>Top referrers</h3><table><tr><th>#</th><th>Student</th><th class="n">Referrals</th></tr>'+pl.slice(0,8).map(function(p,i){return '<tr'+(p[2]?' class="me"':'')+'><td>'+(i+1)+'</td><td>'+p[0]+(p[2]?' (you)':'')+'</td><td class="n">'+p[1]+'</td></tr>'}).join('')+'</table>'+
+ '<p class="sm mute">Initials only. Sample rows are demo data. Any prize for top referrers is a proposed mechanic that needs NxtWave approval.</p></div></div>'}
+
+var SEED={reach:31500,visits:1333,dstart:766,dcomp:574,cta:540,reg:496,links:149,shares:120,refreg:96,src:[['Student coordinators',219],['Tech clubs',164],['Paid hook test',17],['Referral',96]]};
+function cnt(t){return events.filter(function(e){return e.t===t}).length}
+function pct(a,b){return b?Math.round(a/b*1000)/10+'%':'-'}
+function dash(){
+ var m=store.get('model',false),L={visits:cnt('visit'),dstart:cnt('diag_start'),dcomp:cnt('diag_done'),cta:cnt('cta_click'),reg:regs.length,links:cnt('link_created'),shares:cnt('share_click'),refreg:regs.filter(function(r){return r.ref}).length},
+ D=m?SEED:{reach:'-',visits:L.visits,dstart:L.dstart,dcomp:L.dcomp,cta:L.cta,reg:L.reg,links:L.links,shares:L.shares,refreg:L.refreg};
+ var rows=[['Reach (group members)',D.reach,''],['Landing visits',D.visits,''],['Diagnostic starts',D.dstart,pct(D.dstart,D.visits)+' of visits'],['Diagnostic completions',D.dcomp,pct(D.dcomp,D.dstart)+' of starts'],['Registration CTA clicks',D.cta,''],['Registrations',D.reg,pct(D.reg,D.visits)+' of visits'],['Referral links generated',D.links,pct(D.links,D.reg)+' of registrants'],['Referral shares',D.shares,''],['Referral registrations',D.refreg,pct(D.refreg,D.reg)+' of registrations']];
+ function grp(k){var o={};regs.forEach(function(r){var v=r[k]||'Unknown';o[v]=(o[v]||0)+1});return Object.keys(o).map(function(x){return[x,o[x]]})}
+ var srcRows=m?SEED.src:grp('src'),spend=m?1200:0;
+ return '<div class="card"><div style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;align-items:center"><div><h2>Campaign dashboard</h2><p class="mute sm" style="margin:4px 0">'+(m?'Showing the base-case plan numbers (assumptions, not real results).':'Showing live events from this browser.')+'</p></div><button class="btn alt" id="mod">'+(m?'Show live events':'Show base-case model')+'</button></div></div>'+
+ '<div class="grid" style="margin-top:14px"><div class="card"><div class="kpi">'+D.reg+'<span class="mute" style="font-size:18px"> / 500</span></div><div class="sm mute">North star: verified final-year registrations</div></div>'+
+ '<div class="card"><div class="kpi">'+(D.reg?'₹'+(spend/D.reg).toFixed(1):'-')+'</div><div class="sm mute">Cost per registration (planned spend ₹'+spend+')</div></div></div>'+
+ '<div class="grid" style="margin-top:14px"><div class="card scroll"><h3>Funnel</h3><table>'+rows.map(function(r){return '<tr><td>'+r[0]+'</td><td class="n">'+(typeof r[1]==='number'?r[1].toLocaleString():r[1])+'</td><td class="mute sm">'+r[2]+'</td></tr>'}).join('')+'</table></div>'+
+ '<div class="card"><h3>Registrations by source</h3><table>'+(srcRows.length?srcRows.map(function(r){return '<tr><td>'+esc(r[0])+'</td><td class="n">'+r[1]+'</td></tr>'}).join(''):'<tr><td class="mute">No registrations yet. Complete the student flow first.</td></tr>')+'</table>'+
+ '<h3 style="margin-top:16px">By college</h3><table>'+(grp('college').map(function(r){return '<tr><td>'+esc(r[0])+'</td><td class="n">'+r[1]+'</td></tr>'}).join('')||'<tr><td class="mute">-</td></tr>')+'</table>'+
+ '<h3 style="margin-top:16px">By branch</h3><table>'+(grp('branch').map(function(r){return '<tr><td>'+esc(r[0])+'</td><td class="n">'+r[1]+'</td></tr>'}).join('')||'<tr><td class="mute">-</td></tr>')+'</table></div></div>'}
+
+function render(){
+ nav();var h='';
+ if(S.tab==='board')h=board();else if(S.tab==='dash')h=dash();
+ else h=S.step==='land'?land():S.step==='quiz'?quiz():S.step==='res'?resv():S.step==='reg'?regv():thanks();
+ $('#app').innerHTML=h;
+}
+
+document.addEventListener('click',function(e){
+ var t=e.target.closest('button,a');if(!t)return;var id=t.id;
+ if(t.dataset.t){S.tab=t.dataset.t;render();return}
+ if(t.classList.contains('opt')){var q=Q[S.q];S.ans[q.k]=t.dataset.v;S.q++;
+  if(S.q>=Q.length){S.res=result(S.ans);log('diag_done',S.res.name);S.step='res'}render();return}
+ if(id==='go'){log('diag_start');S.step='quiz';S.q=0;S.ans={};render()}
+ else if(id==='skip'){log('cta_click','skip');S.step='reg';render()}
+ else if(id==='reg'){log('cta_click','result');S.step='reg';render()}
+ else if(id==='sub'){
+  var v=function(i){return $('#'+i).value.trim()},err='';
+  var n=v('n'),em=v('em'),ph=v('ph').replace(/\D/g,'').slice(-10),cl=v('cl'),br=v('br'),yr=v('yr');
+  if(!n||!cl||!br||!yr)err='Fill in every field.';
+  else if(!/^\S+@\S+\.\S+$/.test(em))err='Enter a valid email.';
+  else if(ph.length<10)err='Enter a 10-digit phone number.';
+  else if(yr==='no')err='This workshop is for final-year students only.';
+  else if(regs.some(function(r){return r.email.toLowerCase()===em.toLowerCase()||r.phone===ph}))err='This email or phone is already registered.';
+  if(err){$('#e').innerHTML='<div class="err" role="alert">'+err+'</div>';return}
+  var owner=regs.filter(function(r){return r.code===REF})[0];
+  var ref=owner&&owner.email.toLowerCase()!==em.toLowerCase()&&owner.phone!==ph?REF:'';
+  var c=code(n);
+  me={name:n,email:em,phone:ph,college:cl,branch:br,code:c,ref:ref,src:SRC,proj:S.res?S.res.name:'',ts:Date.now()};
+  regs.push(me);store.set('regs',regs);store.set('me',me);log('registered');log('link_created');S.step='thanks';render()}
+ else if(id==='wa'){log('share_click','wa')}
+ else if(id==='cp'){log('share_click','copy');try{navigator.clipboard.writeText(link())}catch(x){}t.textContent='Copied'}
+ else if(id==='sim'){var k=Math.random().toString(36).slice(2,6).toUpperCase();
+  regs.push({name:'Demo Friend',email:k+'@demo.test',phone:'0'+Date.now(),college:me.college,branch:me.branch,code:'DEM'+k,ref:me.code,src:'referral'});store.set('regs',regs);render()}
+ else if(id==='mod'){store.set('model',!store.get('model',false));render()}
+ else if(id==='reset'){regs=[];events=[];me=null;store.set('regs',[]);store.set('ev',[]);store.set('me',null);store.set('model',false);S={tab:'student',step:'land',q:0,ans:{},res:null};log('visit');render()}
+});
+log('visit');render();
+})();
+</script>
+</body>
+</html>
